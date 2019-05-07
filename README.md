@@ -1,1 +1,1 @@
-My First Spring Prgoject on Heroku
+My First Spring Project on Heroku
