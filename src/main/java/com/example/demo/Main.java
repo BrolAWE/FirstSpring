@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.model.Bank;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 @Controller
@@ -51,6 +52,37 @@ public class Main {
 		} catch (Exception e) {
 			model.put("message", e.getMessage());
 			return "error";
+		}
+	}
+
+	@RequestMapping(value="/bank.htm", method= RequestMethod.GET)
+
+	public ModelAndView my_method(@RequestParam(value = "x", defaultValue= "0") int x,
+								  ModelMap model) throws ClassNotFoundException, SQLException {
+		try (Connection c = dataSource.getConnection()) {
+		ResultSet rs = c.createStatement().executeQuery( "SELECT * FROM public.\"Bank\" WHERE \"Dolg\">="+x );
+		ArrayList<Bank> My_Bank = new ArrayList<Bank>();
+		while (rs.next()){
+			Bank bank = new Bank();
+			bank.setId(rs.getInt("Id"));
+			bank.setPerson(rs.getString("Person"));
+			bank.setDolg(rs.getDouble("Dolg"));
+			bank.setPlatit(rs.getBoolean("Platit"));
+			bank.setPhone(rs.getString("Phone"));
+			My_Bank.add(bank);
+		}
+		rs.close();
+		c.close();
+		Comparator<Bank> comparator = Comparator.comparing(obj -> obj.getPerson());
+		Collections.sort(My_Bank, comparator);
+		// Помещение результатов в параметр запроса
+		ModelAndView m = new ModelAndView("bank");//Имя страницы, которая принимает данные
+		m.addObject("bank", My_Bank); //carManager.getCarList());
+		return m;
+		} catch (Exception e) {
+			model.put("message", e.getMessage());
+			ModelAndView ms = new ModelAndView("bank");
+			return ms;
 		}
 	}
 
