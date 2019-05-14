@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.*;
 
@@ -31,12 +33,6 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(Main.class, args);
 	}
-
-	@RequestMapping("/")
-	String index() {
-		return "index";
-	}
-
 	@RequestMapping("/db")
 	String db(Map<String, Object> model) {
 		try (Connection connection = dataSource.getConnection()) {
@@ -57,6 +53,7 @@ public class Main {
 			return "error";
 		}
 	}
+
 
 	@Bean
 	public DataSource dataSource() throws SQLException {
