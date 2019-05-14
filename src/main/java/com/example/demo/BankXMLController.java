@@ -23,7 +23,7 @@ public class BankXMLController implements Controller {
     public ModelAndView handleRequest(HttpServletRequest arg0,
                                       HttpServletResponse arg1) throws Exception {
         ArrayList<Bank> empList = new ArrayList<Bank>();
-        String filePath = "C:\\Users\\aleks\\IdeaProjects\\UniSpring\\src\\XML\\Bank.xml";
+        String filePath = "src\\main\\java\\com\\example\\demo\\XML\\Bank.xml";
         File xmlFile = new File(filePath);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
