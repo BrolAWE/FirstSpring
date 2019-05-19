@@ -36,6 +36,10 @@
   </div>
 </nav>
 <div th:replace="${template}"></div>
+<div style="background-color:lightgray; height: 400px;width: 800px">
+  <h2> Физико-математический факультет СМОЛГУ</h2>
+  <p>${my_hello}</p>
+</div>
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}"></script>
