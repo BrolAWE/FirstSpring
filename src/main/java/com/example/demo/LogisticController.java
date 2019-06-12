@@ -41,7 +41,7 @@ public class LogisticController {
                            HttpServletResponse response,
                            @RequestParam(value = "x", defaultValue= "001") String x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
         Connection c = dataSource.getConnection();
-        ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\" WHERE \"route_kod\"='"+x+"'");
+        ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\"");
         ArrayList<Routes> My_Routes = new ArrayList<Routes>();
         System.out.println("Маршруты водителям от САМОЙЛОВОЙ из POSTGRE:");
         while (rs.next()){
@@ -60,7 +60,7 @@ public class LogisticController {
         }
         rs.close();
         c.close();
-        response.setContentType("text/html;charset=UTF-64");
+        response.setContentType("text/html;charset=UTF-128");
         Gson gson = new Gson();
         String s = gson.toJson(My_Routes);
         return s.getBytes();
