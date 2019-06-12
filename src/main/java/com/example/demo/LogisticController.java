@@ -41,8 +41,7 @@ public class LogisticController {
                            HttpServletResponse response,
                            @RequestParam(value = "x", defaultValue= "001") int x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
         Connection c = dataSource.getConnection();
-        String numberAsString = Integer.toString(x);
-        ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\" WHERE \"route_kod\"='"+numberAsString+"'");
+        ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\" WHERE \"route_kod\"='"+x+"'");
         ArrayList<Routes> My_Routes = new ArrayList<Routes>();
         System.out.println("Маршруты водителям от САМОЙЛОВОЙ из POSTGRE:");
         while (rs.next()){
