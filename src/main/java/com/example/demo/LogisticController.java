@@ -39,7 +39,7 @@ public class LogisticController {
 
     public byte[] Getroute(HttpServletRequest request,
                            HttpServletResponse response,
-                           @RequestParam(value = "x", defaultValue= "001") String x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
+                           @RequestParam(value = "x", defaultValue= "001") int x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
         Connection c = dataSource.getConnection();
         ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\"");
         ArrayList<Routes> My_Routes = new ArrayList<Routes>();
