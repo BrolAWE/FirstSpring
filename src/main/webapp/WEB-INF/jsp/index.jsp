@@ -32,6 +32,9 @@
       <li class="nav-item">
         <a class="nav-link" href="calc.htm">Calc</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="my_route.htm">REST</a>
+      </li>
     </ul>
   </div>
 </nav>
