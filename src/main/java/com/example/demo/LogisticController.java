@@ -60,7 +60,6 @@ public class LogisticController {
         }
         rs.close();
         c.close();
-        response.setContentType("text/html;charset=UTF-8");
         Gson gson = new Gson();
         String s = gson.toJson(My_Routes);
         return s.getBytes();
