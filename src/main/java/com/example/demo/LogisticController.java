@@ -39,7 +39,7 @@ public class LogisticController {
 
     public byte[] Getroute(HttpServletRequest request,
                            HttpServletResponse response,
-                           @RequestParam(value = "x", defaultValue= "001") int x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
+                           @RequestParam(required = false, defaultValue = "001", value="x") String x) throws SQLException {   // throws SQLException ОБЯЗАТЕЛЕН!!!!
         Connection c = dataSource.getConnection();
         ResultSet rs = c.createStatement().executeQuery("SELECT * FROM public.\"routes\" WHERE \"route_kod\"='"+x+"'");
         ArrayList<Routes> My_Routes = new ArrayList<Routes>();
@@ -60,7 +60,7 @@ public class LogisticController {
         }
         rs.close();
         c.close();
-        response.setContentType("text/html;charset=UTF-128");
+        response.setContentType("text/html;charset=UTF-8");
         Gson gson = new Gson();
         String s = gson.toJson(My_Routes);
         return s.getBytes();
